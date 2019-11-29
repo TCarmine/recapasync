@@ -1,17 +1,21 @@
 console.log('Before');
 
+//let commits = ['ahagsd','ahshgegeh','jeheee'];
+
 getUser(1,(user)=>{
     getRepository(user.gitHubUsername,(repos)=>{
-       getCommits('Carmine',)
+       console.log(repos); 
+       getCommits('Carmine',(commits)=>{
+            console.log(commits);
+       });
     });
 }); 
 console.log('After');
 
 function getCommits(getUser, callback){
     setTimeout(()=>{
-            let commits = ['ahagsd','ahshgegeh','jeheee'];
-            callback({commits});
-            return;
+        callback({name:'Carmine',array:['ahagsd','ahshgegeh','jeheee']});
+        return;
     },2000); 
 };
 
