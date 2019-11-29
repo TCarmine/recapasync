@@ -7,6 +7,7 @@ getUser(1,(user)=>{
        console.log(repos); 
        getCommits('Carmine',(commits)=>{
             console.log(commits);
+            sayHello();
        });
     });
 }); 
@@ -35,4 +36,13 @@ function getRepository(username,callback){
        callback({repos});
        return;
    },2000);
+}
+
+function sayHello(){
+    setTimeout(()=>{
+     console.log(`cmq sasi e'...`)+
+         setTimeout(()=>{
+             console.log(`è gay`);
+         },2500);
+    },1500);
 }
