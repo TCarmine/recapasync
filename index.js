@@ -1,32 +1,39 @@
 console.log('Before');
 
-//let commits = ['ahagsd','ahshgegeh','jeheee'];
+let commits = ['ahagsd','ahshgegeh','jeheee'];
 
 getUser(1,(user)=>{
-    getRepository(user.gitHubUsername,(repos)=>{
-       console.log(repos); 
-       getCommits('Carmine',(commits)=>{
-            console.log(commits);
-            sayHello();
-       });
-    });
-}); 
+    getRepository(user.gitHubUsername,displyRepos);
+    getCommits('Carmine',displayCommits(commits));
+    sayHello();
+});    
+ 
 console.log('After');
 
-function getCommits(getUser, callback){
+
+
+function getCommits(getUser, commits){
     setTimeout(()=>{
-        callback({name:'Carmine',array:['ahagsd','ahshgegeh','jeheee']});
+        displayCommits(commits);
         return;
     },2000); 
 };
+
+function displayCommits(commits){
+    console.log(commits);
+}
 
 function getUser(id, callback){
     setTimeout(()=>{
         console.log('Reading user info from DB...');
         callback({id:id, gitHubUsername:'carmine'});
         return;
-    },2000);
+    },1500);
 };
+
+function displyRepos(repos){
+    console.log(repos);
+}
 
 function getRepository(username,callback){
    setTimeout(()=>{
@@ -43,6 +50,6 @@ function sayHello(){
      console.log(`cmq sasi e'...`)+
          setTimeout(()=>{
              console.log(`è gay`);
-         },2500);
-    },1500);
+         },1500);
+    },2000);
 }
