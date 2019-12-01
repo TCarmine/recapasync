@@ -1,7 +1,5 @@
 console.log('Before');
 
-let commits = ['ahagsd','ahshgegeh','jeheee'];
-
 getUser(1,(user)=>{
     getRepository(user.gitHubUsername,displyRepos);
     getCommits('Carmine',displayCommits(commits));
@@ -14,6 +12,7 @@ console.log('After');
 
 function getCommits(getUser, commits){
     setTimeout(()=>{
+        let commits = ['ahagsd','ahshgegeh','jeheee'];
         displayCommits(commits);
         return;
     },2000); 
