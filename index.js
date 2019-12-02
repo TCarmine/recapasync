@@ -18,8 +18,8 @@ function getCommits(getUser){
         setTimeout(()=>{
             let commits = ['ahagsd','ahshgegeh','jeheee'];
             this.commits = commits;
-            displayCommits(commits);
-            return;
+            console.log('Commits: ',commits);    
+            resolve(commits);
         },2000); 
     }) 
    
@@ -29,15 +29,19 @@ function displayCommits(commits){
     console.log(commits);
 }
 
-const p = getUser(1);
-p.then(user => console.log(user));
+getUser(1)
+  .then(user => getRepository(user.gitHubUsername))
+  .then(repos => getCommits(repos[0]))
+  .then(commits => (commits));
+
+
 
 function getUser(id){
     return new Promise((resolve, reject)=>{
         setTimeout(()=>{
             console.log('Reading user info from DB...');
             resolve({id:id, gitHubUsername:'carmine'});
-        },1500);  
+        },2000);  
     });
   
 }
@@ -53,8 +57,8 @@ function getRepository(username){
             let repos= ['repo1','repo2','repo3'];
             //here the array need to be wrapped otherwise callback is seen as a function
             // and not a callback
-            resolve({repos});
-            return;
+            console.log('Repos:  ',repos);
+            resolve(repos);
         },2000);
     }) 
   
