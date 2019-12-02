@@ -29,12 +29,21 @@ function displayCommits(commits){
     console.log(commits);
 }
 
-getUser(1)
-  .then(user => getRepository(user.gitHubUsername))
-  .then(repos => getCommits(repos))
-  .then(commits => (commits))
-  .catch(err => console.log('Err: ', err.message))
+// getUser(1)
+//   .then(user => getRepository(user.gitHubUsername))
+//   .then(repos => getCommits(repos))
+//   .then(commits => (commits))
+//   .catch(err => console.log('Err: ', err.message))
 
+// Async and Await method
+async function displayAll(){
+    const user    = await getUser(1);
+    const repos   = await getRepository(user.gitHubUsername);
+    const commits = await getCommits(repos);
+    console.log(commits);
+}
+
+displayAll();
 
 
 function getUser(id){
