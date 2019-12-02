@@ -32,7 +32,8 @@ function displayCommits(commits){
 getUser(1)
   .then(user => getRepository(user.gitHubUsername))
   .then(repos => getCommits(repos))
-  .then(commits => (commits));
+  .then(commits => (commits))
+  .catch(err => console.log('Err: ', err.message))
 
 
 
