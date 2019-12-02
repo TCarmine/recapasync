@@ -31,7 +31,7 @@ function displayCommits(commits){
 
 getUser(1)
   .then(user => getRepository(user.gitHubUsername))
-  .then(repos => getCommits(repos[0]))
+  .then(repos => getCommits(repos))
   .then(commits => (commits));
 
 
@@ -40,6 +40,7 @@ function getUser(id){
     return new Promise((resolve, reject)=>{
         setTimeout(()=>{
             console.log('Reading user info from DB...');
+            console.log({id:id, gitHubUsername:'carmine'});
             resolve({id:id, gitHubUsername:'carmine'});
         },2000);  
     });
