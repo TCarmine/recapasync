@@ -2,57 +2,69 @@ console.log('Before');
 
 // let commits = ['ahagsd','ahshgegeh','jeheee'];
 
-getUser(1,(user)=>{
-    getRepository(user.gitHubUsername,displyRepos);
-    let commits = ['ahagsd','ahshgegeh','jeheee'];
-    getCommits('Carmine',displayCommits(commits));
-    sayHello();
-});    
+// getUser(1,(user)=>{
+//     getRepository(user.gitHubUsername,displyRepos);
+//     let commits = ['ahagsd','ahshgegeh','jeheee'];
+//     getCommits('Carmine',displayCommits(commits));
+//     sayHello();
+// });    
  
 console.log('After');
 
 
 
-function getCommits(getUser, commits){
-    setTimeout(()=>{
-        let commits = ['ahagsd','ahshgegeh','jeheee'];
-        this.commits = commits;
-        displayCommits(commits);
-        return;
-    },2000); 
+function getCommits(getUser){
+    return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            let commits = ['ahagsd','ahshgegeh','jeheee'];
+            this.commits = commits;
+            displayCommits(commits);
+            return;
+        },2000); 
+    }) 
+   
 };
 
 function displayCommits(commits){
     console.log(commits);
 }
 
-function getUser(id, callback){
-    setTimeout(()=>{
-        console.log('Reading user info from DB...');
-        callback({id:id, gitHubUsername:'carmine'});
-        return;
-    },1500);
-};
+const p = getUser(1);
+p.then(user => console.log(user));
+
+function getUser(id){
+    return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            console.log('Reading user info from DB...');
+            resolve({id:id, gitHubUsername:'carmine'});
+        },1500);  
+    });
+  
+}
 
 function displyRepos(repos){
     console.log(repos);
 }
 
-function getRepository(username,callback){
-   setTimeout(()=>{
-       let repos= ['repo1','repo2','repo3'];
-       //here the array need to be wrapped otherwise callback is seen as a function
-       // and not a callback
-       callback({repos});
-       return;
-   },2000);
+function getRepository(username){
+   
+    return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            let repos= ['repo1','repo2','repo3'];
+            //here the array need to be wrapped otherwise callback is seen as a function
+            // and not a callback
+            resolve({repos});
+            return;
+        },2000);
+    }) 
+  
 }
 
 function sayHello(){
     setTimeout(()=>{
-     console.log(`cmq sasi e'...`)+
+     console.log(`Hello...`)+
          setTimeout(()=>{
-             console.log(`è gay`);
+             console.log(`to you`);
          },1500);
     },2000);
 }
