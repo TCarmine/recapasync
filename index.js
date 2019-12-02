@@ -40,7 +40,6 @@ async function displayAll(){
     const user    = await getUser(1);
     const repos   = await getRepository(user.gitHubUsername);
     const commits = await getCommits(repos);
-    console.log(commits);
 }
 
 displayAll();
