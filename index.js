@@ -37,9 +37,15 @@ function displayCommits(commits){
 
 // Async and Await method
 async function displayAll(){
-    const user    = await getUser(1);
-    const repos   = await getRepository(user.gitHubUsername);
-    const commits = await getCommits(repos);
+     
+    try{
+        const user    = await getUser(1);
+        const repos   = await getRepository(user.gitHubUsername);
+        const commits = await getCommits(repos);
+    }
+    catch{
+        console.log('Error: ', err.message);
+    }    
 }
 
 displayAll();
