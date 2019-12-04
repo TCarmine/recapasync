@@ -57,5 +57,5 @@ function readLocal(filename, encoding) {
 
 // /home/ca/Desktop/nodejs/recapasync/
 readLocal("./hello.txt", "utf-8")
-          .then( data => console.log(data))
-          .catch( err => console.log('Err: ', err.message));
+          .then( data =>{ console.log(data); return;})
+          .catch( err =>{ console.log('Err: ', err.message);return;});
