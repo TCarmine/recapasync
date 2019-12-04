@@ -38,24 +38,57 @@
 
 // insert_ids(movie_ids);
 
-const fs = require("fs");
+// const fs = require("fs");
 
-function readLocal(filename, encoding) {
-  const readP = new Promise((resolve, reject)=>{
-    fs.readFile(filename, encoding,(err, data) => {
-          if(!err){
-            console.log(`Promise :${readP} is been resolved`);
-            resolve(data);
-          }else{
-            console.log(`Promise :${readP} is been rejected`);
-            reject(err);
-          }
-    });
-  })
-  return readP;
+// function readLocal(filename, encoding) {
+//   const readP = new Promise((resolve, reject)=>{
+//     fs.readFile(filename, encoding,(err, data) => {
+//           if(!err){
+//             console.log(`Promise :${readP} is been resolved`);
+//             resolve(data);
+//           }else{
+//             console.log(`Promise :${readP} is been rejected`);
+//             reject(err);
+//           }
+//     });
+//   })
+//   return readP;
+// }
+
+// // /home/ca/Desktop/nodejs/recapasync/
+// readLocal("./hello.txt", "utf-8")
+//           .then( data =>{ console.log(data); return;})
+//           .catch( err =>{ console.log('Err: ', err.message);return;});
+
+
+const fs = require("fs");
+const zlib = require("zlib");
+
+function zlibPromise(data) {
+  return new Promise((resolve, reject)=>{
+      zlib.gzip(data, (error, result) => {
+        if(!error){
+          resolve(result);
+        }else{
+          reject(error);
+        }
+      });   
+  });
+
 }
 
-// /home/ca/Desktop/nodejs/recapasync/
-readLocal("./hello.txt", "utf-8")
-          .then( data =>{ console.log(data); return;})
-          .catch( err =>{ console.log('Err: ', err.message);return;});
+function readFile(filename, encoding) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filename, encoding, (err, data) => {
+      if (err) reject(err);
+      resolve(data);
+    });
+  });
+}
+
+readFile("./hello.txt", "utf-8")
+    .then(data => zlibPromise(data))
+    .then(result => console.log(result))
+    .catch(err => console.log(`The error : ${error.message}, accurred`))
+
+   // --> Load it then zip it and then print it to screen
